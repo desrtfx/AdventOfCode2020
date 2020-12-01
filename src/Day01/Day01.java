@@ -2,27 +2,16 @@ package Day01;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 public class Day01 {
 	
 	static int[] data;
 
 	static {
-		String infile="Input/Day01.txt";
-		Path path = Paths.get(infile);
-	
-		List<String> lines;
 		try {
-			lines = Files.readAllLines(path);
-			data = new int[lines.size()];
-			for(int i = 0; i < lines.size(); i++) {
-				data[i] = Integer.parseInt(lines.get(i));
-			}
+			data = Files.readAllLines(Paths.get("Input/Day01.txt")).stream().mapToInt(Integer::parseInt).toArray();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -58,7 +47,6 @@ public class Day01 {
 	
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int[] test = new int[] {1721, 979, 366, 299, 675, 1456};
 		System.out.println("Test part 1: " + part01(test, 2020));
 		System.out.println("Part 1: " + part01(data, 2020));
