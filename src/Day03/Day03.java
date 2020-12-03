@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Day03 {
 	
@@ -14,11 +15,10 @@ public class Day03 {
 	
 	static {
 		try {
-			List<String> tmp = Files.readAllLines(Paths.get("Input/Day03.txt"));
-			data = new char[tmp.size()][];
-			for(int i = 0; i < tmp.size(); i++) {
-				data[i] = tmp.get(i).toCharArray();
-			}
+			data =  Files.readAllLines(Paths.get("Input/Day03.txt"))
+					    .stream()
+					    .map(e -> e.toCharArray())
+					    .toArray(char[][]::new);
 			width = data[0].length; 
 		} catch (IOException e) {
 			e.printStackTrace();
