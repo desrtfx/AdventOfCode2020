@@ -53,7 +53,7 @@ public class Day02 {
 		}
 
 	}
-	
+	   
 	public static int part01(List<DbEntry> data) {
 		return (int)data.stream().filter(e -> e.isValidPart1()).count();
 	}
