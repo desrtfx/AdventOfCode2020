@@ -57,19 +57,19 @@ public class Day04 {
 		}
 
 		boolean isValid2() {
-			if (!numInRange(attrib.getOrDefault("byr", null), 1920, 2002))
+			if (!numInRange(attrib.get("byr"), 1920, 2002))
 				return false; // byr
-			if (!numInRange(attrib.getOrDefault("iyr", null), 2010, 2020))
+			if (!numInRange(attrib.get("iyr"), 2010, 2020))
 				return false; // iyr
-			if (!numInRange(attrib.getOrDefault("eyr", null), 2020, 2030))
+			if (!numInRange(attrib.get("eyr"), 2020, 2030))
 				return false; // eyr
-			if (!matchesRegex(attrib.getOrDefault("hgt", null), "^((1([5-8][0-9]|9[0-3])cm)|((59|6[0-9]|7[0-6])in))$"))
+			if (!matchesRegex(attrib.get("hgt"), "^((1([5-8][0-9]|9[0-3])cm)|((59|6[0-9]|7[0-6])in))$"))
 				return false; // hgt
-			if (!matchesRegex(attrib.getOrDefault("hcl", null), "^(#[0-9a-f]{6})$"))
+			if (!matchesRegex(attrib.get("hcl"), "^(#[0-9a-f]{6})$"))
 				return false; // hcl
-			if (!matchesRegex(attrib.getOrDefault("ecl", null), "^(amb|blu|brn|gry|grn|hzl|oth)$"))
+			if (!matchesRegex(attrib.get("ecl"), "^(amb|blu|brn|gry|grn|hzl|oth)$"))
 				return false; // ecl
-			return matchesRegex(attrib.getOrDefault("pid", null), "^[0-9]{9}$"); // pid
+			return matchesRegex(attrib.get("pid"), "^[0-9]{9}$"); // pid
 
 		}
 
