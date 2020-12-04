@@ -33,9 +33,13 @@ public class Day01 {
 		long result = 0L;
 		for (int i = 0; i < input.length - 2; i++) {
 			for (int j = i + 1; j < input.length - 1; j++) {
-				for (int k = j + 1; k < input.length; k++) {
-					if (input[i] + input[j] + input[k] == target) {
-						return (long) input[i] * input[j] * input[k];
+				int twoSum = input[i] + input[j];
+				if (twoSum < target) {
+					int sought = target - twoSum;
+					for (int k = j + 1; k < input.length; k++) {
+						if (input[k] == sought) {
+							return (long) input[i] * input[j] * input[k];
+						}
 					}
 				}
 			}
