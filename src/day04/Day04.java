@@ -14,6 +14,8 @@ import java.util.stream.Stream;
 
 public class Day04 {
 
+	static final String TWO_LINE_BREAKS = System.lineSeparator() + System.lineSeparator();
+
 	static class Passport {
 
 		final Pattern PATTERN = Pattern.compile("(\\S*:\\S*)[\\s]?");
@@ -33,7 +35,7 @@ public class Day04 {
 			return attrib.keySet().containsAll(REQUIRED);
 		}
 
-		boolean numInRange(String num, int len, int min, int max) {
+		boolean numInRange(String num, int min, int max) {
 			if (num == null) {
 				return false;
 			}
@@ -44,7 +46,7 @@ public class Day04 {
 				return false;
 			}
 
-			return (num.length() == len) && ((inum >= min) && (inum <= max));
+			return ((inum >= min) && (inum <= max));
 		}
 
 		boolean matchesRegex(String data, String rule) {
@@ -55,11 +57,11 @@ public class Day04 {
 		}
 
 		boolean isValid2() {
-			if (!numInRange(attrib.getOrDefault("byr", null), 4, 1920, 2002))
+			if (!numInRange(attrib.getOrDefault("byr", null), 1920, 2002))
 				return false; // byr
-			if (!numInRange(attrib.getOrDefault("iyr", null), 4, 2010, 2020))
+			if (!numInRange(attrib.getOrDefault("iyr", null), 2010, 2020))
 				return false; // iyr
-			if (!numInRange(attrib.getOrDefault("eyr", null), 4, 2020, 2030))
+			if (!numInRange(attrib.getOrDefault("eyr", null), 2020, 2030))
 				return false; // eyr
 			if (!matchesRegex(attrib.getOrDefault("hgt", null), "^((1([5-8][0-9]|9[0-3])cm)|((59|6[0-9]|7[0-6])in))$"))
 				return false; // hgt
@@ -75,12 +77,10 @@ public class Day04 {
 
 	public static void main(String[] args) {
 
-		String s = System.lineSeparator() + System.lineSeparator();
 
 		try {
-			String[] lines = Files.readString(Paths.get("Input/Day04.txt")).split(s);
 
-			List<Passport> valid1 = Stream.of(lines)
+			List<Passport> valid1 =  Stream.of(Files.readString(Paths.get("Input/Day04.txt")).split(TWO_LINE_BREAKS))
 										  .map(Passport::new)
 										  .filter(p -> p.isValid1())
 										  .collect(Collectors.toList());
