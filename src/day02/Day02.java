@@ -3,11 +3,11 @@ package day02;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Day02 {
 	
@@ -63,11 +63,13 @@ public class Day02 {
 	}
 
 	public static void main(String[] args) {
-
-		List<DbEntry> testData = new ArrayList<>();
+		String[] sample = new String[] {"1-3 a: abcde","1-3 b: cdefg","2-9 c: ccccccccc"}; 
+		
+		List<DbEntry> testData = Stream.of(sample).map(DbEntry::new).collect(Collectors.toList());
+		/* List<DbEntry> testData = new ArrayList<>();
 		testData.add(new DbEntry("1-3 a: abcde"));
 		testData.add(new DbEntry("1-3 b: cdefg"));
-		testData.add(new DbEntry("2-9 c: ccccccccc"));
+		testData.add(new DbEntry("2-9 c: ccccccccc")); */
 		int p = part01(testData);
 		int expected = 2;
 		System.out.printf("TestData - Part 1 result: %d - expected %d - %s%n%n", p,expected,(p==expected?"pass":"fail"));
