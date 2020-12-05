@@ -11,8 +11,7 @@ public class Day05 {
 	public static int seatToNum(String s) {
 		int n = 0;
 		for(char c : s.toCharArray()) {
-			n = n * 2;
-			n = n + (((c=='B')||(c=='R')) ? 1 : 0);
+			n = (n << 1) + (((c=='B')||(c=='R')) ? 1 : 0);
 		}
 		return n;
 	}
