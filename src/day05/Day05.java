@@ -23,14 +23,12 @@ public class Day05 {
 					                  .stream()
 					                  .map(s -> seatToNum(s))
 					                  .collect(Collectors.toList());
-			
-			
-			int max = nums.stream().max(Integer::compare).get();
-			
-			System.out.println("Part 01: " + max);
+					                  
 			
 			nums.sort(Integer::compare);
+			System.out.println("Part 01: " + nums.get(nums.size()-1));
 			
+		
 			for(int i = 1; i < nums.size()-1; i++) {
 				if(nums.get(i + 1) - nums.get(i) == 2) {  
 					System.out.println("Part 2: " + (nums.get(i)+1));
