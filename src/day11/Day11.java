@@ -1,9 +1,10 @@
 package day11;
 
 import java.io.IOException;
+import java.nio.CharBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.Arrays;
 
 public class Day11 {
 
@@ -21,10 +22,8 @@ public class Day11 {
 
 	static {
 		try {
-			data = Files.readAllLines(Paths.get("Input/Day11.txt"))
-					    .stream()
-					    .map(e -> e.toCharArray())
-					    .toArray(char[][]::new);
+			data = Files.readAllLines(Paths.get("Input/Day11.txt")).stream().map(e -> e.toCharArray())
+					.toArray(char[][]::new);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -32,12 +31,7 @@ public class Day11 {
 
 	public static boolean tick(boolean part1) {
 		boolean changed = false;
-		int maxOcc;
-		if (part1) {
-			maxOcc = 4;
-		} else {
-			maxOcc = 5;
-		}
+		int maxOcc = (part1) ? 4 : 5;
 		next = new char[height][width];
 		for (int row = 0; row < height; row++) {
 			for (int col = 0; col < width; col++) {
@@ -70,7 +64,6 @@ public class Day11 {
 						break;
 					}
 				}
-
 				if ((curr[row][col] == EMPTY) && (neighbors == 0)) {
 					next[row][col] = OCC;
 					changed = true;
@@ -79,7 +72,6 @@ public class Day11 {
 					next[row][col] = EMPTY;
 					changed = true;
 				}
-
 			}
 		}
 		return changed;
@@ -88,12 +80,7 @@ public class Day11 {
 	public static void prepare(char[][] data) {
 		height = data.length;
 		width = data[0].length;
-		curr = new char[height][width];
-		for (int row = 0; row < data.length; row++) {
-			for (int col = 0; col < data[row].length; col++) {
-				curr[row][col] = data[row][col];
-			}
-		}
+		curr = Arrays.stream(data).map(char[]::clone).toArray(char[][]::new);
 	}
 
 	public static void simulate(boolean part1) {
@@ -105,15 +92,8 @@ public class Day11 {
 	}
 
 	public static int countTotals() {
-		int count = 0;
-		for (int row = 0; row < curr.length; row++) {
-			for (int col = 0; col < curr[row].length; col++) {
-				if (curr[row][col] == OCC) {
-					count++;
-				}
-			}
-		}
-		return count;
+		return (int) Arrays.stream(curr).map(CharBuffer::wrap).flatMapToInt(CharBuffer::chars).filter(i -> i == OCC)
+				.count();
 	}
 
 	public static int part01(char[][] data) {
