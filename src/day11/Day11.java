@@ -21,11 +21,10 @@ public class Day11 {
 
 	static {
 		try {
-			List<String> lines = Files.readAllLines(Paths.get("Input/Day11.txt"));
-			data = new char[lines.size()][];
-			for (int i = 0; i < lines.size(); i++) {
-				data[i] = lines.get(i).toCharArray();
-			}
+			data = Files.readAllLines(Paths.get("Input/Day11.txt"))
+					    .stream()
+					    .map(e -> e.toCharArray())
+					    .toArray(char[][]::new);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
